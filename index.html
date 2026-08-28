@@ -8,7 +8,9 @@
   <meta property="og:title" content="Technovia™ | ComfortView Tablet Pillow Stand">
   <meta property="og:description" content="Ergonomic multi-angle microfiber tablet and phone pillow stand with side pocket.">
   <meta property="og:site_name" content="Technovia">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f172a'/><polygon points='6,24 16,6 26,24' fill='%2364748b'/><polygon points='16,6 26,24 19,24 12,12' fill='%232563eb'/><rect x='6' y='21' width='5' height='3' rx='1.5' fill='%2394a3b8'/><rect x='13' y='14' width='6' height='9' rx='1' fill='%23ffffff' opacity='0.9'/></svg>">
+  <meta property="og:image" content="stand-gray.jpg">
+  <link rel="icon" type="image/jpeg" href="stand-gray.jpg">
+  <link rel="apple-touch-icon" href="stand-gray.jpg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -163,7 +165,7 @@
       background: #ffffff;
       border-radius: var(--radius);
       border: 1px solid var(--border);
-      padding: 32px 24px;
+      padding: 24px;
       text-align: center;
       box-shadow: var(--shadow-sm);
       display: flex;
@@ -172,6 +174,16 @@
       justify-content: center;
       margin-bottom: 24px;
     }
+    .preview-img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-md);
+      margin-bottom: 16px;
+      transition: opacity 0.25s ease;
+      background: var(--surface-subtle);
+    }
     .color-preview-cube {
       width: 140px;
       height: 140px;
@@ -179,7 +191,7 @@
       margin-bottom: 16px;
       box-shadow: var(--shadow-lg);
       transition: background-color 0.3s ease, transform 0.2s ease;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       color: #ffffff;
@@ -521,6 +533,15 @@
       margin-bottom: 16px;
       align-items: center;
     }
+    .cart-item-thumb {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      object-fit: cover;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      flex-shrink: 0;
+    }
     .cart-item-info {
       flex: 1;
     }
@@ -649,21 +670,19 @@
     </div>
   </header>
   <main class="main-container">
-    <!-- Red Section: Title & Details at Top -->
     <section class="product-header-section">
       <div class="badge-rating">⭐ 4.9/5 Customer Favorite</div>
       <h1 class="product-title">Technovia™ ComfortView Tablet Pillow Stand</h1>
       <p class="product-desc">Enjoy comfortable hands-free viewing, reading, and streaming anywhere. Designed for bed, sofa, desk, or travel.</p>
     </section>
 
-    <!-- Orange Section: Dynamic Color Preview Image (Yellow feature pills removed) -->
     <div class="visual-showcase">
+      <img class="preview-img" id="preview-img" src="stand-gray.jpg" alt="Technovia ComfortView Tablet Pillow Stand in Slate Gray" onerror="handleImgError()">
       <div class="color-preview-cube" id="preview-box" style="background-color: #64748b;">📱</div>
       <h3 id="preview-label">Slate Gray Stand</h3>
       <p>Ultra-soft microfiber pillow stand with ergonomic viewing wedge, non-slip base, and side pocket.</p>
     </div>
 
-    <!-- Pricing & Selector Controls -->
     <div class="product-card-controls">
       <div class="price-display-box">
         <div>
@@ -675,16 +694,16 @@
       <div class="selection-group" id="single-color-group">
         <label class="selection-label">Select Color:</label>
         <div class="color-grid">
-          <button type="button" class="color-btn active" onclick="setSingleColor('Slate Gray', '#64748b', this)">
+          <button type="button" class="color-btn active" onclick="setSingleColor('Slate Gray', '#64748b', 'stand-gray.jpg', this)">
             <span class="color-dot dot-gray"></span> Gray
           </button>
-          <button type="button" class="color-btn" onclick="setSingleColor('Midnight Black', '#1e293b', this)">
+          <button type="button" class="color-btn" onclick="setSingleColor('Midnight Black', '#1e293b', 'stand-black.jpg', this)">
             <span class="color-dot dot-black"></span> Black
           </button>
-          <button type="button" class="color-btn" onclick="setSingleColor('Ocean Blue', '#1d4ed8', this)">
+          <button type="button" class="color-btn" onclick="setSingleColor('Ocean Blue', '#1d4ed8', 'stand-blue.jpg', this)">
             <span class="color-dot dot-blue"></span> Blue
           </button>
-          <button type="button" class="color-btn" onclick="setSingleColor('Wine Red', '#991b1b', this)">
+          <button type="button" class="color-btn" onclick="setSingleColor('Wine Red', '#991b1b', 'stand-red.jpg', this)">
             <span class="color-dot dot-red"></span> Red
           </button>
         </div>
@@ -809,17 +828,40 @@
   </footer>
 
   <script>
+    const colorImages = {
+      'Slate Gray': 'stand-gray.jpg',
+      'Midnight Black': 'stand-black.jpg',
+      'Ocean Blue': 'stand-blue.jpg',
+      'Wine Red': 'stand-red.jpg'
+    };
     let selectedColor = 'Slate Gray';
     let selectedColorHex = '#64748b';
     let currentQty = 1;
     let cart = [];
 
-    function setSingleColor(name, hex, btn) {
+    function handleImgError() {
+      const img = document.getElementById('preview-img');
+      const cube = document.getElementById('preview-box');
+      img.style.display = 'none';
+      cube.style.display = 'flex';
+      cube.style.backgroundColor = selectedColorHex;
+    }
+
+    function setSingleColor(name, hex, imgSrc, btn) {
       selectedColor = name;
       selectedColorHex = hex;
       document.querySelectorAll('#single-color-group .color-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      document.getElementById('preview-box').style.backgroundColor = hex;
+      const img = document.getElementById('preview-img');
+      const cube = document.getElementById('preview-box');
+      if (img.style.display !== 'none') {
+        img.style.opacity = '0';
+        img.src = colorImages[name];
+        img.alt = 'Technovia ComfortView Tablet Pillow Stand in ' + name;
+        img.onload = () => { img.style.opacity = '1'; };
+      } else {
+        cube.style.backgroundColor = hex;
+      }
       document.getElementById('preview-label').innerText = name + ' Stand';
     }
 
@@ -840,7 +882,7 @@
     function triggerCartVibration() {
       const btn = document.getElementById('nav-cart-btn');
       btn.classList.remove('cart-vibrating');
-      void btn.offsetWidth; // trigger reflow
+      void btn.offsetWidth;
       btn.classList.add('cart-vibrating');
       setTimeout(() => btn.classList.remove('cart-vibrating'), 600);
       if (navigator.vibrate) {
@@ -857,6 +899,7 @@
           id: 'item-' + selectedColor.toLowerCase().replace(/\s+/g, '-'),
           title: 'Technovia™ ComfortView Stand',
           color: selectedColor,
+          img: colorImages[selectedColor],
           qty: currentQty
         });
       }
@@ -918,6 +961,7 @@
       cart.forEach((item, idx) => {
         html += `
           <div class="cart-item">
+            <img class="cart-item-thumb" src="${item.img}" alt="${item.color}" onerror="this.style.visibility='hidden'">
             <div class="cart-item-info">
               <div class="cart-item-title">${item.title}</div>
               <div class="cart-item-desc">Color: <strong>${item.color}</strong></div>
