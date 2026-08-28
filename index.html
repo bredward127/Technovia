@@ -826,15 +826,26 @@
       'Wine Red': '#991b1b'
     };
 
-    // Shown in place of a product photo that fails to load, so a missing
-    // file degrades to a labelled colour swatch instead of a broken icon.
+    // Drawn in place of a product photo that fails to load, so a missing file
+    // degrades to a labelled illustration rather than a broken-image icon.
+    // Attributes are double-quoted: encodeURIComponent escapes " but not ',
+    // so single quotes here would break out of an HTML src attribute.
     function placeholderImage(name) {
       const hex = colorHexes[name] || '#64748b';
-      const svg = "<svg xmlns='http://www.w3.org/2000/svg' width='480' height='480' viewBox='0 0 480 480'>" +
-        "<rect width='480' height='480' fill='#f1f5f9'/>" +
-        "<rect x='120' y='150' width='240' height='180' rx='24' fill='" + hex + "'/>" +
-        "<text x='240' y='400' text-anchor='middle' font-family='Plus Jakarta Sans, sans-serif'" +
-        " font-size='26' font-weight='600' fill='#475569'>" + name + " Stand</text></svg>";
+      const svg = '<svg xmlns="http://www.w3.org/2000/svg" width="480" height="400" viewBox="0 0 480 400">'
+        + '<rect width="480" height="400" fill="#f8fafc"/>'
+        + '<ellipse cx="242" cy="356" rx="176" ry="14" fill="#0f172a" opacity="0.07"/>'
+        + '<path d="M196 118 Q214 96 234 116 L410 312 Q430 346 400 346 L84 346 Q54 346 74 314 Z" fill="' + hex + '"/>'
+        + '<path d="M196 118 Q214 96 234 116 L242 346 L84 346 Q54 346 74 314 Z" fill="#000" opacity="0.12"/>'
+        + '<g transform="rotate(-3 252 236)">'
+        +   '<rect x="158" y="164" width="198" height="150" rx="10" fill="#f8fafc"/>'
+        +   '<rect x="166" y="175" width="182" height="128" rx="4" fill="#152340"/>'
+        +   '<rect x="166" y="175" width="182" height="52" rx="4" fill="#fff" opacity="0.07"/>'
+        +   '<circle cx="352" cy="239" r="3.5" fill="#cbd5e1"/>'
+        + '</g>'
+        + '<rect x="96" y="304" width="292" height="44" rx="22" fill="' + hex + '"/>'
+        + '<rect x="96" y="304" width="292" height="19" rx="9.5" fill="#fff" opacity="0.14"/>'
+        + '</svg>';
       return 'data:image/svg+xml,' + encodeURIComponent(svg);
     }
 
