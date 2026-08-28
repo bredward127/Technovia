@@ -10,7 +10,7 @@ Standalone one-page ecommerce storefront for **Technovia™ ComfortView Tablet P
   - 3+ units: $17.00/ea ($51.00 for 3, saving over $8.90 + Free Shipping)
 - **Flexible Cart:** Add any combination of colors and quantities directly to cart.
 
-## Available Colors
+## Available Colors (with high-res photos)
 - Slate Gray
 - Midnight Black
 - Ocean Blue
