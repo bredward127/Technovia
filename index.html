@@ -263,15 +263,13 @@
       font-weight: 700;
       color: var(--text-main);
     }
-    .color-picker {
-      display: flex;
+    .color-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
-      flex-wrap: wrap;
     }
     .color-btn {
-      flex: 1;
-      min-width: 90px;
-      padding: 10px 12px;
+      padding: 12px 14px;
       border: 1.5px solid var(--border);
       border-radius: var(--radius-sm);
       background: var(--surface);
@@ -283,6 +281,7 @@
       font-size: 13px;
       font-weight: 600;
       transition: all 0.2s ease;
+      width: 100%;
     }
     .color-btn.active {
       border-color: var(--primary-accent);
@@ -381,7 +380,11 @@
       gap: 20px;
       margin-bottom: 64px;
     }
-    @media (max-width: 768px) {\n      .benefits-grid {\n        grid-template-columns: 1fr;\n      }\n    }
+    @media (max-width: 768px) {
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .benefit-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -410,7 +413,11 @@
       grid-template-columns: 1fr 1fr;
       gap: 32px;
     }
-    @media (max-width: 768px) {\n      .policy-grid {\n        grid-template-columns: 1fr;\n      }\n    }
+    @media (max-width: 768px) {
+      .policy-grid {
+        grid-template-columns: 1fr;
+      }
+    }
     .policy-block h4 {
       font-size: 16px;
       font-weight: 700;
@@ -595,12 +602,12 @@
       <div class="visual-showcase">
         <div class="color-preview-cube" id="preview-box" style="background-color: #64748b;">📱</div>
         <h3 id="preview-label">Slate Gray Stand</h3>
-        <p>Premium soft fleece pillow stand with ergonomic viewing wedge, non-slip base, and side pocket.</p>
+        <p>Ultra-soft microfiber pillow stand with ergonomic viewing wedge, non-slip base, and side pocket.</p>
         <div class="feature-tags">
           <span class="feature-tag">Multi-Angle Support</span>
           <span class="feature-tag">Side Pocket</span>
           <span class="feature-tag">Removable Cover</span>
-          <span class="feature-tag">Washable Suede</span>
+          <span class="feature-tag">Washable Microfiber</span>
         </div>
       </div>
       <div class="product-details">
@@ -627,7 +634,7 @@
         </div>
         <div class="selection-group" id="single-color-group">
           <label class="selection-label">Select Color:</label>
-          <div class="color-picker">
+          <div class="color-grid">
             <button type="button" class="color-btn active" onclick="setSingleColor('Slate Gray', '#64748b', this)">
               <span class="color-dot dot-gray"></span> Gray
             </button>
@@ -643,22 +650,38 @@
           </div>
         </div>
         <div class="selection-group" id="duo-color-group" style="display: none;">
-          <div style="margin-bottom: 8px;">
+          <div style="margin-bottom: 12px;">
             <label class="selection-label">Color #1:</label>
-            <div class="color-picker" style="margin-top: 4px;">
-              <button type="button" class="color-btn active" onclick="setDuoColor(1, 'Slate Gray', this)">Gray</button>
-              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Midnight Black', this)">Black</button>
-              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Ocean Blue', this)">Blue</button>
-              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Wine Red', this)">Red</button>
+            <div class="color-grid" style="margin-top: 6px;">
+              <button type="button" class="color-btn active" onclick="setDuoColor(1, 'Slate Gray', this)">
+                <span class="color-dot dot-gray"></span> Gray
+              </button>
+              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Midnight Black', this)">
+                <span class="color-dot dot-black"></span> Black
+              </button>
+              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Ocean Blue', this)">
+                <span class="color-dot dot-blue"></span> Blue
+              </button>
+              <button type="button" class="color-btn" onclick="setDuoColor(1, 'Wine Red', this)">
+                <span class="color-dot dot-red"></span> Red
+              </button>
             </div>
           </div>
           <div>
             <label class="selection-label">Color #2:</label>
-            <div class="color-picker" style="margin-top: 4px;">
-              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Slate Gray', this)">Gray</button>
-              <button type="button" class="color-btn active" onclick="setDuoColor(2, 'Midnight Black', this)">Black</button>
-              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Ocean Blue', this)">Blue</button>
-              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Wine Red', this)">Red</button>
+            <div class="color-grid" style="margin-top: 6px;">
+              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Slate Gray', this)">
+                <span class="color-dot dot-gray"></span> Gray
+              </button>
+              <button type="button" class="color-btn active" onclick="setDuoColor(2, 'Midnight Black', this)">
+                <span class="color-dot dot-black"></span> Black
+              </button>
+              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Ocean Blue', this)">
+                <span class="color-dot dot-blue"></span> Blue
+              </button>
+              <button type="button" class="color-btn" onclick="setDuoColor(2, 'Wine Red', this)">
+                <span class="color-dot dot-red"></span> Red
+              </button>
             </div>
           </div>
         </div>
@@ -686,8 +709,8 @@
       </div>
       <div class="spec-card">
         <div class="spec-title">Cover Material</div>
-        <div class="spec-value">Suede / Leather Fleece</div>
-        <div class="spec-sub">Ultra-soft, removable, and machine/hand washable</div>
+        <div class="spec-value">Ultra-Soft Microfiber</div>
+        <div class="spec-sub">Plush, removable, and machine/hand washable</div>
       </div>
       <div class="spec-card">
         <div class="spec-title">Universal Fit</div>
@@ -707,7 +730,7 @@
       </div>
       <div class="benefit-card">
         <h4>Removable & Washable Cover</h4>
-        <p>Features an easy-off zippered suede fleece sleeve that can be removed and washed whenever needed.</p>
+        <p>Features an easy-off zippered plush microfiber sleeve that can be removed and washed whenever needed.</p>
       </div>
     </div>
     <div class="policy-container">

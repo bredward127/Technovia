@@ -13,9 +13,9 @@ Standalone one-page ecommerce storefront for **Technovia™ ComfortView Tablet P
 - Wine Red
 
 ## Product Specifications
-- **Dimensions:** 28 × 20.5 × 21 cm / 22 × 20 × 21 cm (approx. 8.66" × 7.87" × 8.27")
+- **Dimensions:** 22 × 20 × 21 cm (approx. 8.66" × 7.87" × 8.27")
 - **Weight:** 175g - 300g (Ultra-lightweight)
-- **Material:** High-density foam core with removable & washable suede fleece cover
+- **Material:** High-density resilient foam core with removable & washable ultra-soft microfiber cover
 - **Compatibility:** Tablet PC, iPad, Kindle, e-readers, books, and smartphones
 
 ## Checkout Integration
