@@ -3,11 +3,15 @@
 Standalone one-page ecommerce storefront for **Technovia™ ComfortView Tablet Pillow Stand**.
 
 ## Pricing & Offers
-- **Single Unit:** $19.99 (Free Standard U.S. Shipping)
-- **Duo Pack (Mix & Match):** $34.99 (Save $5.00, Free Standard U.S. Shipping)
+- **Base Price:** $19.99 per unit (Free Standard U.S. Shipping)
+- **Automatic Multi-Unit Savings:**
+  - 1 unit: $19.99
+  - 2 units (Duo Pack): $34.99 ($17.50/ea — Save $5.00)
+  - 3+ units: $17.00/ea ($51.00 for 3, saving over $8.90 + Free Shipping)
+- **Flexible Cart:** Add any combination of colors and quantities directly to cart.
 
 ## Available Colors
-- Slate Gray (New)
+- Slate Gray
 - Midnight Black
 - Ocean Blue
 - Wine Red
@@ -19,9 +23,9 @@ Standalone one-page ecommerce storefront for **Technovia™ ComfortView Tablet P
 - **Compatibility:** Tablet PC, iPad, Kindle, e-readers, books, and smartphones
 
 ## Checkout Integration
-- Uses the official PayPal JavaScript SDK with the configured live Client ID.
-- Dynamic cart creation and capture workflow.
-- In-cart post-payment order confirmation view.
+- Uses the official PayPal JavaScript SDK with dynamic order calculations.
+- Multi-item line calculation with in-cart quantity increment/decrement (+ / -).
+- Instant post-payment confirmation screen.
 
 ## Policies & Support
 - **Support Contact:** 3ddi30@gmail.com
