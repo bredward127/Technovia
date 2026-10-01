@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Checkout — Technovia Atelier</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f1ece0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1714'/><text x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1ece0'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://www.paypal.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/config.js"></script>
+</head>
+<body>
+  <header class="header checkout-header is-scrolled">
+    <div class="wrap header__inner">
+      <a href="index.html#shop" class="link">← Continue shopping</a>
+      <a class="logo" href="index.html" data-brand>TECHNOVIA</a>
+      <span class="secure"><svg width="11" height="13" viewBox="0 0 11 13" fill="none" stroke="currentColor"><rect x="0.5" y="5.5" width="10" height="7"/><path d="M2.5 5.5V3.5a3 3 0 0 1 6 0v2"/></svg>Secure checkout</span>
+    </div>
+  </header>
+
+  <main class="checkout" data-checkout>
+    <section class="checkout__main">
+      <div class="steps" data-reveal><span>Bag</span><span>—</span><span class="on">Details & payment</span><span>—</span><span>Confirmation</span></div>
+      <h1 data-split>Checkout</h1>
+
+      <form id="checkout-form" novalidate autocomplete="on">
+        <fieldset class="fieldset" data-reveal>
+          <legend>Contact <span>For your receipt and tracking</span></legend>
+          <div class="input">
+            <input id="email" name="email" type="email" placeholder=" " required autocomplete="email">
+            <label for="email">Email</label>
+            <div class="err">Enter a valid email address</div>
+          </div>
+          <div class="input">
+            <input id="phone" name="phone" type="tel" placeholder=" " autocomplete="tel">
+            <label for="phone">Phone (optional, for delivery updates)</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset" data-reveal>
+          <legend>Shipping address</legend>
+          <div class="input">
+            <select id="country" name="country" required autocomplete="country"></select>
+            <label for="country">Country / region</label>
+          </div>
+          <div class="grid-2">
+            <div class="input">
+              <input id="first" name="first" placeholder=" " required autocomplete="given-name" maxlength="60">
+              <label for="first">First name</label>
+              <div class="err">Required</div>
+            </div>
+            <div class="input">
+              <input id="last" name="last" placeholder=" " required autocomplete="family-name" maxlength="60">
+              <label for="last">Last name</label>
+              <div class="err">Required</div>
+            </div>
+          </div>
+          <div class="input">
+            <input id="address1" name="address1" placeholder=" " required autocomplete="address-line1" maxlength="300">
+            <label for="address1">Address</label>
+            <div class="err">Required</div>
+          </div>
+          <div class="input">
+            <input id="address2" name="address2" placeholder=" " autocomplete="address-line2" maxlength="300">
+            <label for="address2">Apartment, suite, etc. (optional)</label>
+          </div>
+          <div class="grid-3">
+            <div class="input">
+              <input id="city" name="city" placeholder=" " required autocomplete="address-level2" maxlength="120">
+              <label for="city">City</label>
+              <div class="err">Required</div>
+            </div>
+            <div class="input" data-state-wrap>
+              <select id="state" name="state" autocomplete="address-level1"></select>
+              <label for="state">State</label>
+              <div class="err">Required</div>
+            </div>
+            <div class="input">
+              <input id="zip" name="zip" placeholder=" " required autocomplete="postal-code" maxlength="20">
+              <label for="zip">ZIP code</label>
+              <div class="err">Enter a valid code</div>
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset" data-reveal>
+          <legend>Delivery</legend>
+          <div class="ship-option">
+            <div><strong data-ship-label>Complimentary tracked express</strong><small data-ship-eta>Made to order, then 2–5 business days</small></div>
+            <span class="mono" data-ship-cost>Free</span>
+          </div>
+        </fieldset>
+
+        <fieldset class="fieldset" data-reveal>
+          <legend>Payment <span>PayPal · Venmo · Pay Later · Cards</span></legend>
+          <div class="pay-panel">
+            <button type="button" class="pay-panel__lock" data-lock>Complete your details above to unlock payment</button>
+            <p>Pay with PayPal, Venmo, Pay Later, or any debit or credit card — no PayPal account needed. You'll confirm in a secure PayPal window.</p>
+            <div id="paypal-buttons"></div>
+            <div class="pay-msg" data-pp-message data-pp-style-layout="text" data-pp-amount="0"></div>
+            <div class="pay-error" role="alert"></div>
+          </div>
+          <p class="pay-msg">By placing your order you agree that made-to-order pieces are final sale once production begins (changes or cancellations within 24 hours).</p>
+        </fieldset>
+      </form>
+    </section>
+
+    <aside class="checkout__aside" aria-label="Order summary">
+      <div class="checkout__aside-inner">
+        <button type="button" class="summary-toggle" aria-expanded="false"><span>Show order summary ↓</span><strong data-total>$0</strong></button>
+        <div class="summary-body">
+          <div class="summary-items"></div>
+          <div class="totals">
+            <div><span>Subtotal</span><span data-subtotal>$0</span></div>
+            <div><span>Shipping</span><span data-shipping>Free</span></div>
+            <div class="grand"><span>Total <small style="color:var(--muted)">USD</small></span><strong data-total>$0</strong></div>
+          </div>
+          <div class="aside-note">
+            <div><span>✦</span><p style="margin:0">Made to order. Estimated to ship <b data-ship-window>—</b>.</p></div>
+            <div><span>✦</span><p style="margin:0">Payments are processed securely by PayPal. We never see your card details.</p></div>
+            <div><span>✦</span><p style="margin:0">Questions? <a data-contact href="#">Email the atelier</a>.</p></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <script src="assets/js/bag.js"></script>
+  <script src="assets/js/checkout.js"></script>
+  <script src="assets/js/motion.js"></script>
+</body>
+</html>
