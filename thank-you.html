@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Thank you — Technovia Atelier</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#f1ece0">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%231a1714'/><text x='16' y='23' font-family='Georgia,serif' font-size='20' text-anchor='middle' fill='%23f1ece0'>T</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script src="assets/js/config.js"></script>
+</head>
+<body>
+  <header class="header checkout-header is-scrolled">
+    <div class="wrap header__inner">
+      <a href="index.html" class="link">← Home</a>
+      <a class="logo" href="index.html" data-brand>TECHNOVIA</a>
+      <span class="secure">Order confirmed</span>
+    </div>
+  </header>
+
+  <main class="thanks">
+    <svg class="thanks__seal" viewBox="0 0 92 92" fill="none" stroke="#1a1714" stroke-width="1" aria-hidden="true">
+      <circle cx="46" cy="46" r="44"/>
+      <path d="M30 47l11 11 22-24" stroke-width="1.4"/>
+    </svg>
+    <span class="eyebrow" data-reveal>Order confirmed</span>
+    <h1 class="display" data-split style="margin-top:18px"><span class="line">Thank you<span data-name></span>.</span></h1>
+    <p class="thanks__lede" data-reveal style="--d:.4s" data-lede>Your payment is complete and your hoodie is now in the atelier queue. A receipt is on its way from PayPal, and we'll email tracking the moment it ships.</p>
+
+    <div class="order-meta" data-reveal style="--d:.5s">
+      <div><span>Order</span><strong data-order-id>—</strong></div>
+      <div><span>Date</span><strong data-order-date>—</strong></div>
+      <div><span>Total</span><strong data-order-total>—</strong></div>
+      <div><span>Est. delivery</span><strong data-order-eta>—</strong></div>
+    </div>
+
+    <ol class="timeline" data-stagger="0.12">
+      <li class="done" data-reveal><h3>Order placed</h3><p>Payment received securely via PayPal.</p><span class="when" data-t0>Today</span></li>
+      <li class="now" data-reveal><h3>In the atelier</h3><p>Cut, sewn and finished by hand, just for you.</p><span class="when" data-t1>10–14 business days</span></li>
+      <li data-reveal><h3>Shipped</h3><p>Tracked express. Tracking emailed to you.</p><span class="when" data-t2>—</span></li>
+      <li data-reveal><h3>Delivered</h3><p>Hood up. Welcome to the den.</p><span class="when" data-t3>—</span></li>
+    </ol>
+
+    <div class="thanks__cols">
+      <div data-reveal>
+        <h3>Your order</h3>
+        <div class="summary-items" data-items></div>
+        <div class="totals">
+          <div><span>Subtotal</span><span data-sub>—</span></div>
+          <div><span>Shipping</span><span data-ship>—</span></div>
+          <div class="grand"><span>Total paid</span><strong data-total>—</strong></div>
+        </div>
+      </div>
+      <div data-reveal style="--d:.15s">
+        <h3>Shipping to</h3>
+        <p class="addr" data-addr>—</p>
+        <h3 style="margin-top:32px">Questions</h3>
+        <p class="addr">Need to change your size or colourway? Write within 24 hours of ordering to <a data-contact href="#">the atelier</a> and include your order number.</p>
+        <div style="margin-top:32px; display:flex; gap:12px; flex-wrap:wrap">
+          <a href="index.html" class="btn">Continue shopping <span class="arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer" style="padding-top:40px">
+    <div class="wrap">
+      <div class="footer__mark" data-brand data-reveal style="margin-top:0">TECHNOVIA</div>
+      <div class="footer__base"><span>© <span data-year>2026</span> <span data-brand>TECHNOVIA</span></span><span>Made to order</span></div>
+    </div>
+  </footer>
+
+  <script src="assets/js/bag.js"></script>
+  <script>
+  (function () {
+    const $ = function (s) { return document.querySelector(s); };
+    const esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+    document.querySelectorAll('[data-contact]').forEach(function (a) { a.href = 'mailto:' + STORE.supportEmail; });
+    document.querySelectorAll('[data-year]').forEach(function (el) { el.textContent = new Date().getFullYear(); });
+
+    let order = null;
+    try { order = JSON.parse(sessionStorage.getItem('atelier.lastOrder') || localStorage.getItem('atelier.lastOrder') || 'null'); } catch (e) {}
+    const wanted = new URLSearchParams(location.search).get('order');
+    if (!order || (wanted && order.id !== wanted)) {
+      $('[data-lede]').textContent = 'Your payment went through and a receipt is on its way from PayPal. Order details are shown on the device you ordered from — if you need anything, email ' + STORE.supportEmail + '.';
+      if (wanted) $('[data-order-id]').textContent = wanted;
+      return;
+    }
+
+    const created = new Date(order.createdAt);
+    const eta = STORE.eta(order.shipTo.country, created);
+    const first = (order.shipTo.name || '').split(' ')[0];
+    if (first) $('[data-name]').textContent = ', ' + first;
+    $('[data-order-id]').textContent = order.id;
+    $('[data-order-date]').textContent = created.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    $('[data-order-total]').textContent = Bag.money(order.total);
+    $('[data-order-eta]').textContent = STORE.formatRange(eta.arriveFrom, eta.arriveTo);
+    $('[data-t0]').textContent = created.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    $('[data-t1]').textContent = STORE.production.min + '–' + STORE.production.max + ' business days';
+    $('[data-t2]').textContent = 'Est. ' + STORE.formatRange(eta.shipFrom, eta.shipTo);
+    $('[data-t3]').textContent = 'Est. ' + STORE.formatRange(eta.arriveFrom, eta.arriveTo);
+
+    $('[data-items]').innerHTML = (order.items || []).map(function (i) {
+      return '<div class="summary-item"><div class="summary-item__img"><img src="' + esc(i.image) + '" alt=""><b>' + esc(i.qty) + '</b></div>' +
+        '<div><h4>' + esc(STORE.product.name) + '</h4><p>' + esc(i.name) + ' · ' + esc(i.size) + '</p></div>' +
+        '<span class="amt">' + Bag.money(i.unit * i.qty) + '</span></div>';
+    }).join('');
+    $('[data-sub]').textContent = Bag.money(order.subtotal);
+    $('[data-ship]').textContent = order.shipping ? Bag.money(order.shipping) : 'Free';
+    $('[data-total]').textContent = Bag.money(order.total);
+    const a = order.shipTo;
+    $('[data-addr]').innerHTML = [a.name, a.line1, a.line2, [a.city, a.state, a.zip].filter(Boolean).join(', '), a.country, order.email]
+      .filter(Boolean).map(esc).join('<br>');
+  })();
+  </script>
+  <script src="assets/js/motion.js"></script>
+</body>
+</html>

@@ -1,23 +1,14 @@
 # Product photos
 
-`index.html` loads the colour-variant photos from this directory using
-repo-relative paths, so Vercel serves them from the deployment itself.
+All storefront photos live in `images/hoodie/` and are referenced from the
+`variants` list in `assets/js/config.js`.
 
-Four files are required, one per colour variant:
+| File | Used for |
+| --- | --- |
+| `mink-front.jpg`, `mink-back.jpg`, `mink-side.jpg`, `mink-detail.jpg` | Signature Mocha / Mink Frost gallery, hero slideshow, anatomy, film poster |
+| `leopard-sand.jpg` … `amber-cheetah.jpg` | The Fur Edit (taupe body) |
+| `rust-cream.jpg` … `camel-forest.jpg` | The Colour Edit |
 
-| File | Variant | Swatch |
-| --- | --- | --- |
-| `gray.jpg` | Slate Gray | `#64748b` |
-| `black.jpg` | Midnight Black | `#1e293b` |
-| `blue.jpg` | Ocean Blue | `#1d4ed8` |
-| `red.jpg` | Wine Red | `#991b1b` |
-
-Use square images (1000 × 1000 works well) on a white background — the
-preview renders at up to 480px wide and the cart thumbnails are square.
-
-Any file that is missing falls back to a labelled colour swatch rather than a
-broken-image icon, so the storefront stays presentable while a photo is
-pending. Filenames are matched exactly and are case-sensitive on Vercel.
-
-To change a filename, update the `colorImages` map near the top of the
-`<script>` block in `index.html` to match.
+To swap a photo, replace the file with the same name. White or light-grey
+backgrounds are best — the site blends them into the cream page with
+`mix-blend-mode: multiply`. Square images of 1200 × 1200 or larger look sharpest.
